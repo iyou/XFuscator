@@ -55,7 +55,7 @@ if arg and arg[1] then
         print("  -nocomments     Does not generate pointless comments with random chars")
         print("  -nostep2        Does not turn code into slightly encrypted char array ")
         print("                      along with other stuff. This setting is recommeded.")
-        print("  -d              output file directory")
+        print("  -f              output file directory")
         print("  -uglify         Converts words into chars >127 and then converts back")
         print("                      During execution. Recomended for large files, as it")
         print("                      can shrink code quite a bit. It also makes it unreadable")
@@ -75,7 +75,7 @@ if arg and arg[1] then
         if a == "-nofluff" then
             options.fluff = false
         elseif a == "-f" then
-            outfn = arg[i+1]..'/'..filename
+            outfn = arg[i+1]
         elseif a == "-fluff" then
             options.fluff = true
         elseif a == "-load" then
