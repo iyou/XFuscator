@@ -20,7 +20,7 @@ printhi()
 --print(CONSTANT_POOL[0])
 ]]
 
-local options = { 
+local options = {
     fluff = true,
     useLoadstring = true,
     level = 1,
@@ -55,6 +55,7 @@ if arg and arg[1] then
         print("  -nocomments     Does not generate pointless comments with random chars")
         print("  -nostep2        Does not turn code into slightly encrypted char array ")
         print("                      along with other stuff. This setting is recommeded.")
+        print("  -d              output file directory")
         print("  -uglify         Converts words into chars >127 and then converts back")
         print("                      During execution. Recomended for large files, as it")
         print("                      can shrink code quite a bit. It also makes it unreadable")
@@ -66,12 +67,15 @@ if arg and arg[1] then
     end
     code = io.open(arg[1], 'rb'):read'*a'
     outfn = arg[1]:sub(1, -5) .. " [Obfuscated].lua"
+    local filename = arg[1]:match('[^/]+$')
     local i = 2
     while i <= #arg do
     --for i = 2, #arg do
         local a = arg[i]:lower()
         if a == "-nofluff" then
             options.fluff = false
+        elseif a == "-f" then
+            outfn = arg[i+1]..'/'..filename
         elseif a == "-fluff" then
             options.fluff = true
         elseif a == "-load" then
@@ -95,7 +99,7 @@ if arg and arg[1] then
         elseif a == "-notd" then
             options.tamperDetection = false
         elseif a == "-h" or a == "-help" then
-            
+
         end
         i = i + 1
     end
@@ -122,7 +126,7 @@ else
     else
         print("-- Failed: " .. b)
     end
-    
+
     if outfn then
         local f = io.open(outfn, 'wb')
         f:write(result)
