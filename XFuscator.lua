@@ -48,8 +48,8 @@ if arg and arg[1] then
         print("Valid options:")
         print("  -nofluff        Doesn't generate pointless \"fluff\" code")
         print("  -fluff          Generates pointless \"fluff\" code")
-        print("  -loadstring     Precompiles code with loadstring, along with encrypting locals")
-        print("  -noloadstring   Does not precompile code with loadstring")
+        print("  -load     Precompiles code with load, along with encrypting locals")
+        print("  -noload   Does not precompile code with load")
         print("  -level <level>  Starts obfuscation at level <level>")
         print("  -max <max>      Sets max obfuscation level to <max>")
         print("  -nocomments     Does not generate pointless comments with random chars")
@@ -74,10 +74,10 @@ if arg and arg[1] then
             options.fluff = false
         elseif a == "-fluff" then
             options.fluff = true
-        elseif a == "-loadstring" then
-            options.loadstring = true
-        elseif a == "-noloadstring" then
-            options.loadstring = false
+        elseif a == "-load" then
+            options.load = true
+        elseif a == "-noload" then
+            options.load = false
         elseif a == "-level" or a == "-l" then
             options.level = tonumber(arg[i + 1] or 1)
             i = i + 1
@@ -105,7 +105,7 @@ else
 end
 
 local t1 = os and os.time() or tick()
-local result, msg = XFuscator.XFuscate(code, options.level, options.mxLevel, options.loadstring, options.fluff, options.comments, options.step2, options.uglify, options.encryptConstants, options.tamperDetection)
+local result, msg = XFuscator.XFuscate(code, options.level, options.mxLevel, options.load, options.fluff, options.comments, options.step2, options.uglify, options.encryptConstants, options.tamperDetection)
 local t2 = os and os.time() or tick()
 if not outfn then
     print(result)
@@ -113,7 +113,7 @@ end
 if not result then
     print("-- Failed: " .. msg)
 else
-    local a, b = loadstring(result)
+    local a, b = load(result)
     if a then
         print"-- Successful!"
         if not outfn then

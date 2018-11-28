@@ -68,7 +68,7 @@ Parser = {
                 local l = line:sub(6)
                 while l:sub(1, 1) == " " or l:sub(1, 1) == "\t" do l = l:sub(2) end
                 if l:sub(1, 1) == "\"" then
-                    func.Name = loadstring("return " .. l)()
+                    func.Name = load("return " .. l)()
                 else
                     while l:sub(-1, -1) == " " or l:sub(-1, -1) == "\t" do l = l:sub(1, -2) end
                     func.Name = l
@@ -96,7 +96,7 @@ Parser = {
                     l = l:sub(1, -2) -- strip ending whitespace
                 end
                 if l:sub(1, 1) == "\"" then
-                    func.Locals[func.Locals.Count] = Local:new(loadstring("return " .. l)(), 0, 0)
+                    func.Locals[func.Locals.Count] = Local:new(load("return " .. l)(), 0, 0)
                 else
                     func.Locals[func.Locals.Count] = Local:new(l, 0, 0)
                 end
@@ -109,7 +109,7 @@ Parser = {
                     l = l:sub(1, -2) -- strip ending whitespace
                 end
                 if l:sub(1, 1) == "\"" then
-                    func.Upvalues[func.Upvalues.Count] = { Name = loadstring("return " .. l)() }
+                    func.Upvalues[func.Upvalues.Count] = { Name = load("return " .. l)() }
                 else
                     func.Upvalues[func.Upvalues.Count] = { Name = l }
                 end
@@ -122,7 +122,7 @@ Parser = {
                     l = l:sub(1, -2) -- strip ending whitespace
                 end
                 if l:sub(1, 1) == "\"" then
-                    func.Upvalues[func.Upvalues.Count] = { Name = loadstring("return " .. l)() }
+                    func.Upvalues[func.Upvalues.Count] = { Name = load("return " .. l)() }
                 else
                     func.Upvalues[func.Upvalues.Count] = { Name = l }
                 end
@@ -165,7 +165,7 @@ Parser = {
                 n.FirstLine = lineNumber
                 if l:len() > 0 then
                     if l:sub(1, 1) == "\"" then
-                        n.Name = loadstring("return " .. l)()
+                        n.Name = load("return " .. l)()
                     else
                         n.Name = l
                     end
@@ -185,7 +185,7 @@ Parser = {
                 n.FirstLine = lineNumber
                 if l:len() > 0 then
                     if l:sub(1, 1) == "\"" then
-                        n.Name = loadstring("return " .. l)()
+                        n.Name = load("return " .. l)()
                     else
                         n.Name = l
                     end
@@ -517,7 +517,7 @@ if false then -- Testing.
     local f = io.open("lasm.out", "wb")
     f:write(code)
     f:close()
-    local funcX = { loadstring(code) }
+    local funcX = { load(code) }
     print(funcX[1], funcX[2])
     if funcX[1] then
         funcX[1]()

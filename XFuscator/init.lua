@@ -96,10 +96,10 @@ local function obfuscate(code, level, mxLevel, useLoadstring, makeFluff, randomC
     local a2
     if step2 == true then
         print("Step 2 ...")
-        -- Convert to char/table/loadstring thing
+        -- Convert to char/table/load thing
         a2 = XFuscator.Step2(a, GenerateFluff, useTD)
     else
-        a2 = "return loadstring('" .. dumpString(a) .. "')()"
+        a2 = "return load('" .. dumpString(a) .. "')()"
     end
     
     if randomComments then

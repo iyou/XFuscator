@@ -1,5 +1,5 @@
 return function(a)
-    a, b = loadstring(a)
+    a, b = load(a)
     if not a then
         error("Failed to precompile code: " .. b)
     end

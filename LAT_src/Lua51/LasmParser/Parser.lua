@@ -50,7 +50,7 @@ local Parser = {
         end
         
         local function evalString(str) -- Lexed data is safe to evaluate.
-            local ret = loadstring("return " .. str)()
+            local ret = load("return " .. str)()
             assert(type(ret) == "string", "Error reading string")
             return ret
         end

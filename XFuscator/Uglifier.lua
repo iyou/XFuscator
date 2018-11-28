@@ -43,7 +43,7 @@ return function(a)
     end
     code = "]] .. dumpString(a) .. [["
     patch()
-    loadstring(code)()]]
+    load(code)()]]
     end
     return a
 end

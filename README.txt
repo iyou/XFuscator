@@ -15,7 +15,7 @@ Features:
 - extract all constants
 - Remove extra whitespace
 - Add fluff
-- precompile with loadstring
+- precompile with load
 - precompiled chunks have their locals made completely unrepresentable
 - encode source (or binary chunk)
 - Add unrepresentable characters in comments

@@ -36,7 +36,7 @@ local LuaFile = {
     end,
     
     CompileToFunction = function(self)
-        return loadstring(self:Compile())
+        return load(self:Compile())
     end,
     
     StripDebugInfo = function(self)

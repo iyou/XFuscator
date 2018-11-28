@@ -224,7 +224,7 @@ function mt:add (m)
   local t = 0
   while #self.msg - t >= 64 do
     digestblock(self.msg, t + 1, self.H)
-    t = t + 64 
+    t = t + 64
   end
   self.msg = self.msg:sub(t + 1, -1)
 end
@@ -247,7 +247,7 @@ return {
   new256 = new256,
 }
 ]]
-local sha = loadstring(shaCode2)()
+local sha = load(shaCode2)()
 
 return function(code)
     local hash = sha.hash256(code)

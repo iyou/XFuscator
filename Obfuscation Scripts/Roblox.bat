@@ -1,1 +1,1 @@
-XFuscator.lua "%1" -noloadstring
+XFuscator.lua "%1" -noload
