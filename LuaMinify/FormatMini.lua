@@ -9,17 +9,23 @@ require'LuaMinify.ParseLua'
 -- - All local variables are renamed
 --
 
-local LowerChars = lookupify{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-							 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 
+local LowerChars = lookupify{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+							 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
 							 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
-local UpperChars = lookupify{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 
-							 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 
+local UpperChars = lookupify{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+							 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
 							 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
 local Digits = lookupify{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
 function Format_Mini(ast)
 	local formatStatlist, formatExpr;
 	local count = 0
+
+  local function getIndentation()
+      return string.rep("    ", 0)
+  end
+
+
 	--
 	local function joinStatementsSafe(a, b, sep)
 		if count > 150 then
@@ -27,6 +33,7 @@ function Format_Mini(ast)
 			--return a.."\n"..b
 		end
 		sep = sep or ' '
+
 		local aa, bb = a:sub(-1,-1), b:sub(1,1)
 		if UpperChars[aa] or LowerChars[aa] or aa == '_' then
 			if not (UpperChars[bb] or LowerChars[bb] or bb == '_' or Digits[bb]) then
@@ -328,4 +335,3 @@ function Format_Mini(ast)
 	ast.Scope:ObfuscateVariables()
 	return formatStatlist(ast)
 end
-
